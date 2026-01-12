@@ -1,0 +1,670 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Comic Sans MS', 'Brush Script MT', cursive;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    min-height: 100vh;
+    padding: 40px 20px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Animated background gradient */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(255, 105, 180, 0.1) 0%, 
+        rgba(186, 85, 211, 0.1) 25%,
+        rgba(138, 43, 226, 0.1) 50%,
+        rgba(147, 112, 219, 0.1) 75%,
+        rgba(218, 112, 214, 0.1) 100%);
+    animation: gradientShift 15s ease infinite;
+    z-index: -1;
+}
+
+@keyframes gradientShift {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* Floating background emojis */
+.hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.floating-emoji {
+    position: absolute;
+    font-size: 2em;
+    opacity: 0;
+    animation: floatUp 15s infinite ease-in-out;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(0.5);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg) scale(0.5);
+        opacity: 0;
+    }
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Header Section - Scrapbook style */
+.header-page {
+    background: #fff;
+    padding: 60px 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    margin-bottom: 40px;
+    position: relative;
+    transform: rotate(-0.5deg);
+    transition: transform 0.3s ease;
+}
+
+.header-page:hover {
+    transform: rotate(0deg) scale(1.02);
+}
+
+/* Decorative washi tape at top of header */
+.header-page::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    height: 30px;
+    background: repeating-linear-gradient(
+        45deg,
+        #ff69b4,
+        #ff69b4 10px,
+        transparent 10px,
+        transparent 20px
+    );
+    opacity: 0.3;
+}
+
+.header-page h1 {
+    text-align: center;
+    font-size: 3.5em;
+    background: linear-gradient(135deg, #d946ef, #a855f7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 15px;
+    position: relative;
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.3); }
+}
+
+.header-page .subtitle {
+    text-align: center;
+    color: #8b5cf6;
+    font-size: 1.3em;
+    font-style: italic;
+}
+
+/* Sticker decorations */
+.sticker {
+    position: absolute;
+    font-size: 2.5em;
+    animation: float 3s infinite ease-in-out;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+}
+
+.sticker:nth-child(1) { 
+    top: 10px; 
+    left: 30px; 
+    animation-delay: 0s; 
+}
+
+.sticker:nth-child(2) { 
+    top: 20px; 
+    right: 40px; 
+    animation-delay: 0.5s; 
+}
+
+.sticker:nth-child(3) { 
+    bottom: 20px; 
+    left: 50px; 
+    animation-delay: 1s; 
+}
+
+.sticker:nth-child(4) { 
+    bottom: 30px; 
+    right: 60px; 
+    animation-delay: 1.5s; 
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(-5deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+/* About section - torn paper style */
+.about-section {
+    background: #fffaf0;
+    padding: 50px 40px;
+    margin-bottom: 50px;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    transform: rotate(0.5deg);
+    transition: transform 0.3s ease;
+}
+
+.about-section:hover {
+    transform: rotate(0deg);
+}
+
+/* Torn paper edge effect */
+.about-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 15px;
+    background: linear-gradient(45deg, transparent 33.33%, #fffaf0 33.33%, #fffaf0 66.66%, transparent 66.66%),
+                linear-gradient(-45deg, transparent 33.33%, #fffaf0 33.33%, #fffaf0 66.66%, transparent 66.66%);
+    background-size: 8px 20px;
+    background-position: 0 -10px;
+}
+
+.about-section h2 {
+    font-size: 2.5em;
+    color: #d946ef;
+    text-align: center;
+    margin-bottom: 25px;
+    text-decoration: underline wavy #a855f7;
+}
+
+.about-text {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #555;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Doodles */
+.doodle {
+    position: absolute;
+    font-size: 1.5em;
+    opacity: 0.6;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* Polaroid photo grid */
+.polaroid-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin: 60px 0;
+    padding: 0 20px;
+}
+
+.polaroid {
+    background: white;
+    padding: 15px 15px 50px 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.polaroid:nth-child(1) { transform: rotate(-3deg); }
+.polaroid:nth-child(2) { transform: rotate(2deg); }
+.polaroid:nth-child(3) { transform: rotate(-2deg); }
+.polaroid:nth-child(4) { transform: rotate(4deg); }
+.polaroid:nth-child(5) { transform: rotate(-4deg); }
+.polaroid:nth-child(6) { transform: rotate(3deg); }
+
+.polaroid:hover {
+    transform: rotate(0deg) scale(1.1) !important;
+    z-index: 10;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
+.polaroid-img {
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #fae8ff, #e9d5ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3em;
+    color: rgba(168, 85, 247, 0.4);
+    overflow: hidden;
+}
+
+/* For actual images - add this class to img tags */
+.polaroid-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.polaroid-caption {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 0.9em;
+    color: #666;
+    padding: 5px;
+}
+
+/* Washi tape effect on each polaroid */
+.washi-tape {
+    position: absolute;
+    height: 25px;
+    width: 120px;
+    opacity: 0.7;
+    transform-origin: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.polaroid:nth-child(1) .washi-tape {
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-5deg);
+    background: repeating-linear-gradient(45deg, #ff69b4, #ff69b4 10px, #ff1493 10px, #ff1493 20px);
+}
+
+.polaroid:nth-child(2) .washi-tape {
+    top: -10px;
+    right: 10px;
+    transform: rotate(15deg);
+    background: repeating-linear-gradient(45deg, #a855f7, #a855f7 10px, #8b5cf6 10px, #8b5cf6 20px);
+}
+
+.polaroid:nth-child(3) .washi-tape {
+    top: -10px;
+    left: 10px;
+    transform: rotate(-15deg);
+    background: repeating-linear-gradient(45deg, #6366f1, #6366f1 10px, #4f46e5 10px, #4f46e5 20px);
+}
+
+.polaroid:nth-child(4) .washi-tape {
+    top: -10px;
+    right: 20px;
+    transform: rotate(10deg);
+    background: repeating-linear-gradient(45deg, #ec4899, #ec4899 10px, #db2777 10px, #db2777 20px);
+}
+
+.polaroid:nth-child(5) .washi-tape {
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(5deg);
+    background: repeating-linear-gradient(45deg, #d946ef, #d946ef 10px, #c026d3 10px, #c026d3 20px);
+}
+
+.polaroid:nth-child(6) .washi-tape {
+    top: -10px;
+    left: 15px;
+    transform: rotate(-10deg);
+    background: repeating-linear-gradient(45deg, #f472b6, #f472b6 10px, #ec4899 10px, #ec4899 20px);
+}
+
+/* Scrapbook timeline */
+.timeline-section {
+    background: #fff8e7;
+    padding: 60px 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    margin: 60px 0;
+    position: relative;
+    transform: rotate(-0.3deg);
+    transition: transform 0.3s ease;
+}
+
+.timeline-section:hover {
+    transform: rotate(0deg);
+}
+
+.timeline-section h2 {
+    font-size: 2.5em;
+    color: #d946ef;
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.timeline-section h2::after {
+    content: '✂️';
+    position: absolute;
+    right: 20px;
+    top: -10px;
+    font-size: 0.8em;
+}
+
+.timeline-scrapbook {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    position: relative;
+}
+
+.timeline-memory {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+    opacity: 0;
+    animation: fadeInMemory 0.6s ease-out forwards;
+}
+
+.timeline-memory:nth-child(1) { animation-delay: 0.1s; }
+.timeline-memory:nth-child(2) { animation-delay: 0.2s; }
+.timeline-memory:nth-child(3) { animation-delay: 0.3s; }
+.timeline-memory:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInMemory {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.timeline-memory:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.timeline-mini-polaroid {
+    background: white;
+    padding: 10px 10px 30px 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transform: rotate(-2deg);
+    min-width: 150px;
+    transition: transform 0.3s ease;
+}
+
+.timeline-mini-polaroid:hover {
+    transform: rotate(0deg) scale(1.1);
+}
+
+.timeline-memory:nth-child(even) .timeline-mini-polaroid {
+    transform: rotate(2deg);
+}
+
+.timeline-memory:nth-child(even) .timeline-mini-polaroid:hover {
+    transform: rotate(0deg) scale(1.1);
+}
+
+/* Timeline mini img - COMBINED to support both emojis AND images */
+.timeline-mini-img {
+    width: 130px;
+    height: 130px;
+    background: linear-gradient(135deg, #fae8ff, #ddd6fe);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Timeline images styling */
+.timeline-mini-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 2px;
+}
+
+.timeline-text {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 25px;
+    border-radius: 10px;
+    border: 2px dashed #a855f7;
+    transition: all 0.3s ease;
+}
+
+.timeline-text:hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: #d946ef;
+}
+
+.timeline-date {
+    font-size: 1.3em;
+    color: #ec4899;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.timeline-text h3 {
+    color: #7c3aed;
+    margin-bottom: 8px;
+    font-size: 1.3em;
+}
+
+.timeline-text p {
+    color: #666;
+    line-height: 1.6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Surprise section */
+.surprise-section {
+    text-align: center;
+    background: white;
+    padding: 60px 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    margin: 60px 0;
+    position: relative;
+    transform: rotate(0.5deg);
+    transition: transform 0.3s ease;
+}
+
+.surprise-section:hover {
+    transform: rotate(0deg);
+}
+
+.surprise-section::before {
+    content: '💝';
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3em;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+.surprise-section h2 {
+    color: #d946ef;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+}
+
+.surprise-intro {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.surprise-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    background: linear-gradient(135deg, #ec4899, #d946ef, #a855f7);
+    color: white;
+    font-size: 1.4em;
+    font-weight: bold;
+    padding: 20px 50px;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(236, 72, 153, 0.5);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-family: 'Comic Sans MS', cursive;
+    position: relative;
+    overflow: hidden;
+}
+
+.surprise-button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: rotate(45deg);
+    animation: buttonShine 3s infinite;
+}
+
+@keyframes buttonShine {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+.surprise-button:hover {
+    transform: scale(1.1) rotate(-2deg);
+    box-shadow: 0 15px 40px rgba(236, 72, 153, 0.7);
+}
+
+.surprise-button:active {
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .polaroid-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+
+    .header-page h1 {
+        font-size: 2.5em;
+    }
+
+    .header-page {
+        padding: 40px 25px;
+    }
+
+    .about-section {
+        padding: 35px 25px;
+    }
+
+    .timeline-memory {
+        flex-direction: column !important;
+    }
+
+    .timeline-section {
+        padding: 40px 25px;
+    }
+
+    .timeline-text {
+        width: 100%;
+    }
+
+    .timeline-mini-img {
+        width: 110px;
+        height: 110px;
+    }
+
+    .surprise-button {
+        font-size: 1.2em;
+        padding: 18px 40px;
+    }
+
+    .sticker {
+        font-size: 2em;
+    }
+
+    .floating-emoji {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-page h1 {
+        font-size: 2em;
+    }
+
+    .about-section h2,
+    .timeline-section h2,
+    .surprise-section h2 {
+        font-size: 2em;
+    }
+
+    .polaroid-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .surprise-button {
+        font-size: 1em;
+        padding: 15px 30px;
+        gap: 10px;
+    }
+
+    .timeline-mini-polaroid {
+        min-width: 120px;
+    }
+
+    .timeline-mini-img {
+        width: 100px;
+        height: 100px;
+        font-size: 1.5em;
+    }
+}
